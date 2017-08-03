@@ -1,0 +1,24 @@
+#!/bin/bash
+RPM_INSTALL_PREFIX=
+export RPM_INSTALL_PREFIX
+service WowzaStreamingEngine stop
+service WowzaStreamingEngineManager stop
+/usr/local/WowzaStreamingEngine/bin/shutdown.sh
+/usr/local/WowzaStreamingEngine/manager/bin/shutdownmgr.sh
+if [ -a "/usr/sbin/update-rc.d" ] ; then
+	update-rc.d -f WowzaStreamingEngine remove
+	update-rc.d -f WowzaStreamingEnginemanager remove
+elif [ -a "/sbin/chkconfig" ] ; then
+	/sbin/chkconfig WowzaStreamingEngine off
+	/sbin/chkconfig --del WowzaStreamingEngine
+	/sbin/chkconfig WowzaStreamingEngineManager off
+	/sbin/chkconfig --del WowzaStreamingEngineManager
+fi
+rm -f /etc/init.d/WowzaStreamingEngine
+rm -f /etc/init.d/WowzaStreamingEngineManager
+rm -f /usr/bin/WowzaStreamingEngined
+rm -f /usr/bin/WowzaStreamingEngineManagerd
+rm -rf /usr/local/WowzaStreamingEngine/mediacache
+rm -rf /usr/local/WowzaStreamingEngine/backup
+rm -rf /usr/local/WowzaStreamingEngine/updates
+rm -f /usr/local/WowzaStreamingEngine

@@ -1,0 +1,22 @@
+#!/bin/sh
+RPM_INSTALL_PREFIX=
+export RPM_INSTALL_PREFIX
+rm -f /usr/local/WowzaStreamingEngine
+rm -f /usr/local/WowzaMediaServer
+ln -sf /usr/local/WowzaStreamingEngine-X.X.X /usr/local/WowzaStreamingEngine
+ln -sf /usr/local/WowzaStreamingEngine/bin/WowzaStreamingEngine /etc/init.d/WowzaStreamingEngine
+ln -sf /usr/local/WowzaStreamingEngine/manager/bin/WowzaStreamingEngineManager /etc/init.d/WowzaStreamingEngineManager
+ln -sf /usr/local/WowzaStreamingEngine/bin/WowzaStreamingEngined /usr/bin/WowzaStreamingEngined
+ln -sf /usr/local/WowzaStreamingEngine/manager/bin/WowzaStreamingEngineManagerd /usr/bin/WowzaStreamingEngineManagerd
+if [ ! -d /usr/local/WowzaStreamingEngine/backup ]
+then
+	mkdir /usr/local/WowzaStreamingEngine/backup
+fi
+if [ ! -d /usr/local/WowzaStreamingEngine/updates ]
+then
+	mkdir /usr/local/WowzaStreamingEngine/updates
+fi
+if [ ! -d /usr/local/WowzaStreamingEngine/mediacache ]
+then
+	mkdir /usr/local/WowzaStreamingEngine/mediacache
+fi
